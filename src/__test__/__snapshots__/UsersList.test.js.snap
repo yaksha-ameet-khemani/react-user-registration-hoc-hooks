@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`boundary UsersList boundary should mount UsersList without crashing 1`] = `
+Array [
+  <div
+    className="user-details-div"
+  >
+    <h1
+      className="users-heading"
+      id="users-heading"
+    >
+      Users List
+    </h1>
+    <div
+      className="toggle-btn"
+    >
+      <button
+        aria-label="toggle-btn"
+        data-testid="toggle-btn"
+        id="toggle-btn"
+        name="toggle-btn"
+        role="button"
+      >
+        Toggle User Form
+      </button>
+      <br />
+      <br />
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S.No
+            </th>
+            <th>
+              Name
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Contact
+            </th>
+            <th />
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              No Data Found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>,
+]
+`;

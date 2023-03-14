@@ -1,0 +1,23 @@
+.outer-table {
+  border: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inner-table {
+  border: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.email-error {
+  color: red;
+}
+
+.user-heading {
+  margin-left: 10%;
+}
+
+.btn-table {
+  width: 220%;
+}
