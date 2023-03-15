@@ -108,13 +108,13 @@ describe("boundary", () => {
 });
 
 describe("boundary", () => {
-  test("submit button disabled on invalid data", async () => {
+  test(testName + " submit button disabled on invalid data", async () => {
     const utils = render(<UserRegistrationForm />);
     expect(getById(utils.container, "submit")).toBeInTheDocument();
     expect(getById(utils.container, "submit")).toBeDisabled();
   });
 
-  test("submit button enabled on valued text", async () => {
+  test(testName + " submit button enabled on valued text", async () => {
     const utils = render(<UserRegistrationForm />);
     const { name, email, contact } = setup();
     await waitFor(() => {
@@ -131,7 +131,7 @@ describe("boundary", () => {
     });
   });
 
-  test("update data on clicking submit button", async () => {
+  test(testName + " update data on clicking submit button", async () => {
     const utils = render(<UserRegistrationForm />);
     const { name, email, contact } = setup();
     await waitFor(() => {
