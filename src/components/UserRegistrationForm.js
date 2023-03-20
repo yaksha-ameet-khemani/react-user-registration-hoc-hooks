@@ -4,25 +4,37 @@ import "./UserRegistrationForm.css";
 
 const UserRegistrationForm = ({
   id = "",
-  name = "",
+  firstName = "",
+  lastName = "",
   email = "",
   contact = "",
-  saveUpdateHandler,
+  department = "",
+  designation = "",
+  experience = "",
+  saveUpdateHandler = () => {},
   cancelHandler,
 }) => {
   const [formData, setFormData] = useState({
     id: id,
-    name: name,
+    firstName: firstName,
+    lastName: lastName,
     email: email,
     contact: contact,
+    department: department,
+    designation: designation,
+    experience: experience,
   });
 
   const [invalidForm, setInvalidForm] = useState(true);
 
   const [formError, setFormError] = useState({
-    name: false,
+    firstName: false,
+    lastName: false,
     email: false,
     contact: false,
+    department: false,
+    designation: false,
+    experience: false,
   });
 
   const blurHandler = (e) => {
@@ -79,7 +91,15 @@ const UserRegistrationForm = ({
     ).test(formData.email);
     if (isEmailValid) {
       saveUpdateHandler(formData);
-      setFormData({ name: "", email: "", contact: "" });
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        contact: "",
+        department: "",
+        designation: "",
+        experience: "",
+      });
       setInvalidForm(true);
     } else {
       setFormError((prev) => {
@@ -92,12 +112,21 @@ const UserRegistrationForm = ({
   };
 
   useEffect(() => {
-    const nameValue = formData.name;
+    const nameValue = formData.firstName;
     const emailValue = formData.email;
+    const departmentValue = formData.department;
+    const designationValue = formData.designation;
+    const experienceValue = formData.experience;
     const validEmail = new RegExp(
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     ).test(emailValue);
-    if (nameValue.length > 0 && validEmail) {
+    if (
+      nameValue.length > 0 &&
+      validEmail &&
+      departmentValue.length > 0 &&
+      designationValue.length > 0 &&
+      experienceValue.length > 0
+    ) {
       setInvalidForm(false);
     } else {
       setInvalidForm(true);
@@ -107,11 +136,15 @@ const UserRegistrationForm = ({
   useEffect(() => {
     setFormData({
       id: id,
-      name: name,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       contact: contact,
+      department: department,
+      designation: designation,
+      experience: experience,
     });
-  }, [id, name, email, contact]);
+  }, [id, firstName, email, contact, department, designation, experience]);
 
   return (
     <>
@@ -131,25 +164,46 @@ const UserRegistrationForm = ({
               <table className="inner-table">
                 <tbody>
                   <tr>
-                    <td>*Name:</td>
+                    <td>
+                      <label htmlFor="firstName">*First Name:</label>
+                    </td>
                     <td>
                       <NameFieldWithError
                         type="text"
-                        id="name"
+                        id="firstName"
+                        name="firstName"
                         formData={formData}
                         formError={formError}
-                        errorMessage="Name is required"
+                        errorMessage="First Name is required"
                         blurHandler={blurHandler}
                         changeHandler={changeHandler}
                       />
                     </td>
                   </tr>
                   <tr>
-                    <td>*Email:</td>
+                    <td>
+                      <label htmlFor="lastName">Last Name:</label>
+                    </td>
+                    <td>
+                      <NameFieldWithError
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        formData={formData}
+                        formError={formError}
+                        changeHandler={changeHandler}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label htmlFor="email">*Email:</label>
+                    </td>
                     <td>
                       <NameFieldWithError
                         type="text"
                         id="email"
+                        name="email"
                         formData={formData}
                         formError={formError}
                         errorMessage="Invalid Email"
@@ -159,12 +213,66 @@ const UserRegistrationForm = ({
                     </td>
                   </tr>
                   <tr>
-                    <td>Contact:</td>
+                    <td>
+                      <label htmlFor="contact">Contact:</label>
+                    </td>
                     <td>
                       <NameFieldWithError
                         type="text"
                         id="contact"
+                        name="contact"
                         formData={formData}
+                        changeHandler={changeHandler}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label htmlFor="department">*Department:</label>
+                    </td>
+                    <td>
+                      <NameFieldWithError
+                        type="text"
+                        id="department"
+                        name="department"
+                        formData={formData}
+                        formError={formError}
+                        errorMessage="Department is required"
+                        blurHandler={blurHandler}
+                        changeHandler={changeHandler}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label htmlFor="designation">*Designation:</label>
+                    </td>
+                    <td>
+                      <NameFieldWithError
+                        type="text"
+                        id="designation"
+                        name="designation"
+                        formData={formData}
+                        formError={formError}
+                        errorMessage="Designation is required"
+                        blurHandler={blurHandler}
+                        changeHandler={changeHandler}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label htmlFor="experience">*Experience:</label>
+                    </td>
+                    <td>
+                      <NameFieldWithError
+                        type="number"
+                        id="experience"
+                        name="experience"
+                        formData={formData}
+                        formError={formError}
+                        errorMessage="Experience is required"
+                        blurHandler={blurHandler}
                         changeHandler={changeHandler}
                       />
                     </td>

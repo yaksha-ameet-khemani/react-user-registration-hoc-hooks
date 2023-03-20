@@ -5,9 +5,13 @@ import UsersList from "./UsersList";
 const Users = ({ setDummyData = true }) => {
   const [userData, setUserData] = useState({
     id: 0,
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     contact: "",
+    department: "",
+    designation: "",
+    experience: "",
   });
   const [users, setUsers] = useState({});
   const [userForm, setUserForm] = useState(false);
@@ -20,21 +24,38 @@ const Users = ({ setDummyData = true }) => {
     }
   };
 
-  const saveUpdateHandler = ({ id, name, email, contact }) => {
+  const saveUpdateHandler = ({
+    id,
+    firstName,
+    lastName,
+    email,
+    contact,
+    department,
+    designation,
+    experience,
+  }) => {
     const tempUsers = JSON.parse(JSON.stringify(users));
     if (id !== 0) {
       tempUsers[id] = {
         id,
-        name,
+        firstName,
+        lastName,
         email,
         contact,
+        department,
+        designation,
+        experience,
       };
     } else {
       tempUsers[Object.values(tempUsers).length + 1] = {
         id: Object.values(tempUsers).length + 1,
-        name,
+        firstName,
+        lastName,
         email,
         contact,
+        department,
+        designation,
+        experience,
       };
     }
     setUsers(tempUsers);
@@ -44,9 +65,13 @@ const Users = ({ setDummyData = true }) => {
   const cancelHandler = () => {
     setUserData({
       id: "",
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       contact: "",
+      department: "",
+      designation: "",
+      experience: "",
     });
     setUserForm(false);
   };
@@ -67,9 +92,13 @@ const Users = ({ setDummyData = true }) => {
         <div className="user-registration-form">
           <UserRegistrationForm
             id={userData.id}
-            name={userData.name}
+            firstName={userData.firstName}
+            lastName={userData.lastName}
             email={userData.email}
             contact={userData.contact}
+            department={userData.department}
+            designation={userData.designation}
+            experience={userData.experience}
             saveUpdateHandler={saveUpdateHandler}
             cancelHandler={cancelHandler}
           />

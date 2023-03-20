@@ -4,11 +4,14 @@ import "./UsersList.css";
 const dummyData = [
   {
     id: 1,
-    name: "first",
+    firstName: "first",
+    lastName: "last",
     email: "first@mail.com",
     contact: "7878787878",
+    department: "department",
+    designation: "designation",
+    experience: "1",
   },
-  { id: 2, name: "second", email: "second@mail.com" },
 ];
 
 const UsersList = ({ users, userFormHandler, setUsers, userDataHandler }) => {
@@ -42,9 +45,13 @@ const UsersList = ({ users, userFormHandler, setUsers, userDataHandler }) => {
   const editHandler = (id) => {
     userDataHandler({
       id: listUsers[id]?.id,
-      name: listUsers[id]?.name,
+      firstName: listUsers[id]?.firstName,
+      lastName: listUsers[id]?.lastName,
       email: listUsers[id]?.email,
       contact: listUsers[id]?.contact,
+      department: listUsers[id]?.department,
+      designation: listUsers[id]?.designation,
+      experience: listUsers[id]?.experience,
     });
     userFormHandler(true);
   };
@@ -73,9 +80,13 @@ const UsersList = ({ users, userFormHandler, setUsers, userDataHandler }) => {
           <thead>
             <tr>
               <th>S.No</th>
-              <th>Name</th>
+              <th>First Name</th>
+              <th>Last Name</th>
               <th>Email</th>
               <th>Contact</th>
+              <th>Department</th>
+              <th>Designation</th>
+              <th>Experience</th>
               <th></th>
               <th></th>
             </tr>
@@ -86,9 +97,13 @@ const UsersList = ({ users, userFormHandler, setUsers, userDataHandler }) => {
                 {Object.entries(listUsers).map(([key, note], index) => (
                   <tr key={key}>
                     <td>{key}</td>
-                    <td>{note.name}</td>
+                    <td>{note.firstName}</td>
+                    <td>{note.lastName}</td>
                     <td>{note.email}</td>
                     <td>{note.contact}</td>
+                    <td>{note.department}</td>
+                    <td>{note.designation}</td>
+                    <td>{note.experience}</td>
                     <td>
                       <i
                         className="material-icons"

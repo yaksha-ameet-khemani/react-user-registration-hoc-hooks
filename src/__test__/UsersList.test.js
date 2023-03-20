@@ -19,7 +19,7 @@ import {
 } from "testing-library-table-queries";
 import UsersList from "src/components/UsersList";
 import UserRegistrationForm from "src/components/UserRegistrationForm";
-import * as React from 'react';
+import * as React from "react";
 
 const fields = ["S.No.", "Name", "Email", "", ""];
 const testData = {
@@ -61,7 +61,7 @@ const testName = "UsersList boundary";
 afterEach(cleanup);
 
 describe("boundary", () => {
-  test(`${testName} should mount UsersList without crashing`, () => {
+  test(testName + " should mount UsersList without crashing", () => {
     const component = shallow(<UsersList />);
     expect(component.getElements()).toMatchSnapshot();
     component.unmount();
@@ -71,12 +71,12 @@ describe("boundary", () => {
 describe("boundary", () => {
   const { rows, cells, header, tBodyRow, container, toggleButton } = setup();
 
-  test(`${testName} should be rendered`, async () => {
+  test(testName + " should be rendered", async () => {
     render(<UsersList />);
     expect(await screen.findByText(/Users List/i)).toBeTruthy();
   });
 
-  test(`${testName} should be rendered with data`, async () => {
+  test(testName + " should be rendered with data", async () => {
     const { container } = render(<UsersList users={testData} />);
     const rows = getAllRows(container);
     const header = getByRowgroupType(container, "thead");
@@ -87,7 +87,7 @@ describe("boundary", () => {
     expect(header).toBeTruthy();
   });
 
-  test(`${testName} should be rendered without data`, async () => {
+  test(testName + " should be rendered without data", async () => {
     const { container } = render(<UsersList setDummyData={false} />);
     const rows = getAllRows(container);
     const header = getByRowgroupType(container, "thead");
@@ -98,36 +98,45 @@ describe("boundary", () => {
     expect(header).toBeTruthy();
   });
 
-  test(`${testName} should have header`, async () => {
+  test(testName + " should have header", async () => {
     expect(header).toBeTruthy();
   });
 
-  test(`${testName} should have a toggle button for registration form`, async () => {
-    expect(toggleButton).toBeTruthy();
-  });
+  test(
+    testName + " should have a toggle button for registration form",
+    async () => {
+      expect(toggleButton).toBeTruthy();
+    }
+  );
 
-  test(`${testName} should have a clickable toggle button for registration form`, async () => {
-    render(<UsersList />);
-    const button = screen.getByRole("button");
-    fireEvent.click(button);
-    waitFor(() =>
-      expect(screen.getByText("User Registration")).toBeInTheDocument()
-    );
-  });
+  test(
+    testName + " should have a clickable toggle button for registration form",
+    async () => {
+      render(<UsersList />);
+      const button = screen.getByRole("button");
+      fireEvent.click(button);
+      waitFor(() =>
+        expect(screen.getByText("User Registration")).toBeInTheDocument()
+      );
+    }
+  );
 
-  test(`${testName} should hide registration form on double clicking button`, async () => {
-    const utils = render(<UsersList />);
-    await waitFor(() => {
-      fireEvent.click(getById(utils.container, "toggle-btn"));
-    });
-    waitFor(() =>
-      expect(screen.findByText(/User Registration/i)).toBeInTheDocument()
-    );
-    await waitFor(() => {
-      fireEvent.click(getById(utils.container, "toggle-btn"));
-    });
-    waitFor(() =>
-      expect(screen.findByText(/User Registration/i)).not.toBeInTheDocument()
-    );
-  });
+  test(
+    testName + " should hide registration form on double clicking button",
+    async () => {
+      const utils = render(<UsersList />);
+      await waitFor(() => {
+        fireEvent.click(getById(utils.container, "toggle-btn"));
+      });
+      waitFor(() =>
+        expect(screen.findByText(/User Registration/i)).toBeInTheDocument()
+      );
+      await waitFor(() => {
+        fireEvent.click(getById(utils.container, "toggle-btn"));
+      });
+      waitFor(() =>
+        expect(screen.findByText(/User Registration/i)).not.toBeInTheDocument()
+      );
+    }
+  );
 });
